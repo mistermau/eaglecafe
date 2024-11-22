@@ -1,6 +1,6 @@
 window.onload = function() {
   Tabletop.init({
-    key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGgo9-YNIHJ_Wf9RXMtRBMu3cvBSo4mo1kW42kh5fjDz5TsGTaMviOAh9YdSA0pMjnLyeCNav1e6yk/pubhtml',  // Replace with your Google Sheets URL
+    key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGgo9-YNIHJ_Wf9RXMtRBMu3cvBSo4mo1kW42kh5fjDz5TsGTaMviOAh9YdSA0pMjnLyeCNav1e6yk/pub?output=csv',  // Replace with your Google Sheets URL
     callback: function(data) {
       const reviewsContainer = document.getElementById('reviews-container');
       data.forEach(function(review) {

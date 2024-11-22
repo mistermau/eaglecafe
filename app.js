@@ -28,25 +28,24 @@ function displayReviews(reviews) {
     const reviewCard = document.createElement('div');
     reviewCard.classList.add('review-card');
 
-    // Assuming column headers are 'Rating' and 'Review Text'
+    // Assuming column headers are 'Rating', 'Review Text', and 'Name'
     const rating = parseInt(review['Rating'], 10);
     const reviewText = review['Review Text'];
+    const reviewerName = review['Name'];
 
     // Create rating stars
     const starRating = document.createElement('div');
     starRating.classList.add('star-rating');
     for (let i = 1; i <= 5; i++) {
-      const star = document.createElement('div');
+      const star = document.createElement('span');
       star.classList.add('star');
-      if (i <= rating) {
-        star.classList.add('filled');
-      }
+      star.innerHTML = i <= rating ? '★' : '☆'; // Using Unicode stars
       starRating.appendChild(star);
     }
 
     // Append content to the review card
     reviewCard.innerHTML = `
-      <h3>Review for The Eagle Cafe</h3>
+      <h3>Review by ${reviewerName}</h3>
       <div class="star-rating">${starRating.innerHTML}</div>
       <p class="review-text">${reviewText}</p>
     `;

@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.cafe-info {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reviews {
+  padding: 20px;
+}
+
+.review-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+.review-card h3 {
+  margin: 0;
+}
+
+.star-rating {
+  display: flex;
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+  background-color: lightgray;
+  margin-right: 5px;
+}
+
+.star.filled {
+  background-color: gold;
+}
+
+.review-text {
+  margin-top: 10px;
+}
+
+section {
+  margin: 20px;
+}

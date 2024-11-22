@@ -52,13 +52,18 @@ header p {
 }
 
 
-
+.star {
+  background: linear-gradient(45deg, gold, orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/*
 .star {
   width: 30px;
   height: 30px;
   background-color: white;
   margin-right: 5px; 
-
+*/
   background: linear-gradient(45deg, gold, orange);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

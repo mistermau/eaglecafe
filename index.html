@@ -1,30 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Eagle Cafe Reviews</title>
-  <link rel="stylesheet" href="styles.css">
-  
-  <script src="https://cdn.rawgit.com/jsoma/tabletop/gh-pages/tabletop.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eagle Cafe Reviews</title>
+    <style>
+        .star-rating { display: flex; }
+        .star { width: 20px; height: 20px; background-color: lightgray; margin-right: 2px; }
+        .star.filled { background-color: gold; }
+        .review-card { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .review-author { font-weight: bold; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>The Eagle Cafe Reviews</h1>
-    <p>Welcome to The Eagle Cafe, a unique dining experience run by our talented students. Check out the reviews below!</p>
-  </header>
-
-  <section class="cafe-info">
-    <h2>About The Eagle Cafe</h2>
-    <p>The Eagle Cafe is a student-run cafe located within Washington Technology Magnet. Operated by our students, it provides real-world job training and fosters a sense of community. Here, students not only learn essential skills, but they also serve delicious drinks and snacks made with love.</p>
-  </section>
-
-  <section class="reviews">
-    <h2>Customer Reviews</h2>
+    <h1>Customer Reviews</h1>
     <div id="reviews-container"></div>
-  </section>
 
-  <script src="app.js"></script>
+    <script>
+        window.onload = function() {
+            // The URL of your published Google Spreadsheet CSV file
+            const reviewsUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGgo9-YNIHJ_Wf9RXMtRBMu3cvBSo4mo1kW42kh5fjDz5TsGTaMviOAh9YdSA0pMjnLyeCNav1e6yk/pub?output=csv';
+
+            // Fetch the CSV file
+            fetch(reviewsUrl)
+                .then(response => response.text())
+                .then(csvText => {
+                    // Parse the CSV into rows
+                    const rows = csvText.split('\n');
+
+                    // Get the reviews container element
+                    const reviewsContainer = document.getElementById('reviews-container');
+
+                    // Loop through each row and display reviews
+                    rows.slice(1).forEach(row => {
+                        const columns = row.split(',');
+
+                        // If the row is not empty
+                        if (columns.length > 1) {
+                            const name = columns[0].trim();
+                            const rating = parseInt(columns[1].trim(), 10);
+                            const reviewText = columns.slice(2).join(',').trim(); // Join back in case the review has commas
+
+                            // Skip rows with missing data
+                            if (name && rating && reviewText) {
+                                const reviewCard = document.createElement('div');
+                                reviewCard.classList.add('review-card');
+
+                                // Create rating stars
+                                const starRating = document.createElement('div');
+                                starRating.classList.add('star-rating');
+                                for (let i = 1; i <= 5; i++) {
+                                    const star = document.createElement('div');
+                                    star.classList.add('star');
+                                    if (i <= rating) {
+                                        star.classList.add('filled');
+                                    }
+                                    starRating.appendChild(star);
+                                }
+
+                                // Set the review content
+                                reviewCard.innerHTML = `
+                                    <h3>Review for The Eagle Cafe</h3>
+                                    <p class="review-text">${reviewText}</p>
+                                    <p class="review-author">- ${name}</p>
+                                `;
+
+                                // Append the stars and review card
+                                reviewCard.appendChild(starRating);
+                                reviewsContainer.appendChild(reviewCard);
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching the reviews:", error);
+                });
+        };
+    </script>
 </body>
 </html>
